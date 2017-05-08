@@ -21,6 +21,7 @@ server.use(prerender.sendPrerenderHeader());
 server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
 server.use(stripHtml);
+server.use(prerender.inMemoryHtmlCache());
 
 server.start();
 
