@@ -3,17 +3,21 @@ const prerender = require('prerender');
 const forwardHeaders = require('./forwardHeaders');
 const stripHtml = require('./stripHtml');
 const healthcheck = require('./healthcheck');
+const cacheMiddleware = require('./cacheMiddleware');
 
 const options = {
-	workers : process.env.PRERENDER_NUM_WORKERS || 4,
+	workers : process.env.PRERENDER_NUM_WORKERS || 1,
 	iterations : process.env.PRERENDER_NUM_ITERATIONS || 25,
-	softIterations : process.env.PRERENDER_NUM_SOFT_ITERATIONS || 10,
+	softIterations : process.env.PRERENDER_NUM_SOFT_ITERATIONS || 20,
 	jsTimeout : process.env.JS_TIMEOUT || 30000,
-	jsCheckTimeout : 600,
+	jsCheckTimeout : 1600,
+	resourceDownloadTimeout : 20000
 };
 console.log('Starting with options:', options);
 
 const server = prerender(options);
+
+cacheMiddleware.init()
 
 server.use(healthcheck('_health'));
 server.use(forwardHeaders);
@@ -21,7 +25,7 @@ server.use(prerender.sendPrerenderHeader());
 server.use(prerender.removeScriptTags());
 server.use(prerender.httpHeaders());
 server.use(stripHtml);
-server.use(prerender.inMemoryHtmlCache());
+server.use(cacheMiddleware);
 
 server.start();
 
