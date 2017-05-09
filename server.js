@@ -10,8 +10,8 @@ const options = {
 	iterations : process.env.PRERENDER_NUM_ITERATIONS || 25,
 	softIterations : process.env.PRERENDER_NUM_SOFT_ITERATIONS || 20,
 	jsTimeout : process.env.JS_TIMEOUT || 30000,
-	jsCheckTimeout : 1600,
-	resourceDownloadTimeout : 20000
+	jsCheckTimeout : 600,
+	resourceDownloadTimeout : process.env.RESOURCE_DOWNLOAD_TIMEOUT || 2000
 };
 console.log('Starting with options:', options);
 
