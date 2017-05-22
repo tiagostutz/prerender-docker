@@ -9,7 +9,7 @@ const options = {
 	workers : process.env.PRERENDER_NUM_WORKERS || 1,
 	iterations : process.env.PRERENDER_NUM_ITERATIONS || 25,
 	softIterations : process.env.PRERENDER_NUM_SOFT_ITERATIONS || 20,
-	jsTimeout : process.env.JS_TIMEOUT || 30000,
+	jsTimeout : process.env.JS_TIMEOUT || 7000,
 	jsCheckTimeout : 600,
 	resourceDownloadTimeout : process.env.RESOURCE_DOWNLOAD_TIMEOUT || 7000
 };
