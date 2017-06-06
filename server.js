@@ -1,6 +1,7 @@
 const prerender = require('prerender');
 
 var server = prerender({
+
     workers: process.env.PRERENDER_NUM_WORKERS || 7,
     iterations: process.env.PRERENDER_NUM_ITERATIONS,
 		logRequests: true
